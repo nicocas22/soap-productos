@@ -54,12 +54,34 @@ function calcularProductos(productos, hoyISO) {
   return { porVencer, vencidos }
 }
 
+function normalizarProductos(raw) {
+  // Caso 1: ya es un array
+  if (Array.isArray(raw)) return raw
+
+  // Caso 2: es un string JSON
+  if (typeof raw === 'string') {
+    const parsed = JSON.parse(raw)
+    if (Array.isArray(parsed)) return parsed
+    return Object.values(parsed)
+  }
+
+  // Caso 3: es un objeto con keys 0, 1, 2... (array serializado como objeto XML)
+  if (typeof raw === 'object' && raw !== null) {
+    return Object.values(raw)
+  }
+
+  throw new Error('Formato de productosJson no reconocido')
+}
+
 const serviceObject = {
   ProductosService: {
     ProductosPort: {
       calcularProductos: function (args) {
         try {
-          const productos = JSON.parse(args.productosJson)
+          console.log('[SOAP] args.productosJson tipo:', typeof args.productosJson)
+          console.log('[SOAP] args.productosJson valor:', JSON.stringify(args.productosJson).substring(0, 200))
+
+          const productos = normalizarProductos(args.productosJson)
           const hoyISO = args.hoyISO
 
           console.log(`[SOAP] calcularProductos → ${productos.length} productos, hoy: ${hoyISO}`)
