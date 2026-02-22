@@ -12,7 +12,7 @@
       <xsd:element name="calcularProductos">
         <xsd:complexType>
           <xsd:sequence>
-            <xsd:element name="productosJson" type="xsd:string"/>
+            <xsd:element name="productosJson" type="xsd:anyType"/>
             <xsd:element name="hoyISO" type="xsd:string"/>
           </xsd:sequence>
         </xsd:complexType>
