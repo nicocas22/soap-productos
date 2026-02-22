@@ -49,7 +49,6 @@ function calcularProductos(productos, hoyISO) {
     } else if (hoy >= fechaRetiro) {
       porVencer.push(productoCalculado)
     }
-    // NORMAL no se incluye
   })
 
   return { porVencer, vencidos }
@@ -86,21 +85,26 @@ app.get('/', (req, res) => {
 })
 
 app.listen(PORT, () => {
-    console.log(`Servidor corriendo en puerto ${PORT}`)
-  
-    try {
-      const wsdlPath = path.join(__dirname, 'productos.wsdl')
-      console.log(`[SOAP] Cargando WSDL desde: ${wsdlPath}`)
-      const wsdl = fs.readFileSync(wsdlPath, 'utf8')
-      console.log(`[SOAP] WSDL cargado OK`)
-  
-      soap.listen(app, '/productos', serviceObject, wsdl, () => {
+  console.log(`Servidor corriendo en puerto ${PORT}`)
+
+  try {
+    const wsdlPath = path.join(__dirname, 'productos.wsdl')
+    console.log(`[SOAP] Cargando WSDL desde: ${wsdlPath}`)
+    const wsdl = fs.readFileSync(wsdlPath, 'utf8')
+    console.log(`[SOAP] WSDL cargado OK`)
+
+    soap.listen(app, '/productos', serviceObject, wsdl, (err) => {
+      if (err) {
+        console.error(`[SOAP] Error al montar:`, err.message)
+        console.error(err.stack)
+      } else {
         console.log(`[SOAP] Servicio montado correctamente en /productos`)
-      })
-  
-      console.log(`[SOAP] soap.listen ejecutado`)
-    } catch (err) {
-      console.error(`[SOAP] Error:`, err.message)
-      console.error(err.stack)
-    }
-  })
+      }
+    })
+
+    console.log(`[SOAP] soap.listen ejecutado`)
+  } catch (err) {
+    console.error(`[SOAP] Error:`, err.message)
+    console.error(err.stack)
+  }
+})
