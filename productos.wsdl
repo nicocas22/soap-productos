@@ -52,7 +52,7 @@
 
   <wsdl:service name="ProductosService">
     <wsdl:port name="ProductosPort" binding="tns:ProductosBinding">
-      <soap:address location="http://localhost:3000/productos"/>
+      <soap:address location="https://soap-productos-production.up.railway.app/productos"/>
     </wsdl:port>
   </wsdl:service>
 
