@@ -2,7 +2,7 @@ const express = require('express')
 const soap = require('soap')
 const fs = require('fs')
 const path = require('path')
-
+const { parse } = require('csv-parse/sync')
 const app = express()
 const PORT = process.env.PORT || 3000
 
@@ -55,23 +55,32 @@ function calcularProductos(productos, hoyISO) {
 }
 
 function normalizarProductos(raw) {
-  // Caso 1: ya es un array
-  if (Array.isArray(raw)) return raw
-
-  // Caso 2: es un string JSON
-  if (typeof raw === 'string') {
-    const parsed = JSON.parse(raw)
-    if (Array.isArray(parsed)) return parsed
-    return Object.values(parsed)
+    if (Array.isArray(raw)) return raw
+  
+    if (typeof raw === 'string') {
+      // Intentar como JSON primero
+      try {
+        const parsed = JSON.parse(raw)
+        return Array.isArray(parsed) ? parsed : Object.values(parsed)
+      } catch (e) {
+        // Es CSV, parsearlo
+        const rows = parse(raw, {
+          delimiter: ';',
+          columns: true,
+          skip_empty_lines: true
+        })
+        return rows.map(row => ({
+          _id: row._id,
+          customerData: JSON.parse(row.customerData.replace(/""/g, '"')),
+          mbData: JSON.parse(row.mbData.replace(/""/g, '"'))
+        }))
+      }
+    }
+  
+    if (typeof raw === 'object' && raw !== null) return Object.values(raw)
+  
+    throw new Error('Formato no reconocido')
   }
-
-  // Caso 3: es un objeto con keys 0, 1, 2... (array serializado como objeto XML)
-  if (typeof raw === 'object' && raw !== null) {
-    return Object.values(raw)
-  }
-
-  throw new Error('Formato de productosJson no reconocido')
-}
 
 const serviceObject = {
   ProductosService: {
