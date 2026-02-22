@@ -1,5 +1,5 @@
 const express = require('express')
-const soap = require('strong-soap').soap
+const soap = require('soap')
 const fs = require('fs')
 const path = require('path')
 
