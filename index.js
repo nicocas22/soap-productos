@@ -15,14 +15,13 @@ function formatDate(date) {
 
 function calcularProductos(productos, hoyISO) {
   const hoy = new Date(hoyISO)
+  const porVencer = []
+  const vencidos = []
 
-  return productos.map(producto => {
+  productos.forEach(producto => {
     const fechaVencimiento = new Date(producto.customerData.FechaVencimiento)
     const diasRetiro = producto.customerData.DiasRetiro || 0
-
-    const msRestantes = fechaVencimiento - hoy
-    const diasRestantes = Math.floor(msRestantes / (1000 * 60 * 60 * 24))
-
+    const diasRestantes = Math.floor((fechaVencimiento - hoy) / (1000 * 60 * 60 * 24))
     const fechaRetiro = new Date(fechaVencimiento)
     fechaRetiro.setDate(fechaRetiro.getDate() - diasRetiro)
 
@@ -35,17 +34,25 @@ function calcularProductos(productos, hoyISO) {
       estado = 'NORMAL'
     }
 
-    return {
+    const productoCalculado = {
       ...producto,
       calculado: {
         diasRestantes,
-        fechaRetiro: fechaRetiro.toISOString(),
-        fechaRetiroFormateada: formatDate(fechaRetiro),
+        fechaRetiro: formatDate(fechaRetiro),
         fechaVencimientoFormateada: formatDate(fechaVencimiento),
         estado
       }
     }
+
+    if (diasRestantes < 0) {
+      vencidos.push(productoCalculado)
+    } else if (hoy >= fechaRetiro) {
+      porVencer.push(productoCalculado)
+    }
+    // NORMAL no se incluye
   })
+
+  return { porVencer, vencidos }
 }
 
 const serviceObject = {
@@ -59,6 +66,8 @@ const serviceObject = {
           console.log(`[SOAP] calcularProductos → ${productos.length} productos, hoy: ${hoyISO}`)
 
           const resultado = calcularProductos(productos, hoyISO)
+
+          console.log(`[SOAP] porVencer: ${resultado.porVencer.length} | vencidos: ${resultado.vencidos.length}`)
 
           return { return: JSON.stringify(resultado) }
         } catch (err) {

@@ -147,28 +147,68 @@ const productos = [
   
   function calcularProductos(productos, hoyISO) {
     const hoy = new Date(hoyISO)
-    return productos.map(producto => {
+    const porVencer = []
+    const vencidos = []
+  
+    productos.forEach(producto => {
       const fechaVencimiento = new Date(producto.customerData.FechaVencimiento)
       const diasRetiro = producto.customerData.DiasRetiro || 0
       const diasRestantes = Math.floor((fechaVencimiento - hoy) / (1000 * 60 * 60 * 24))
       const fechaRetiro = new Date(fechaVencimiento)
       fechaRetiro.setDate(fechaRetiro.getDate() - diasRetiro)
-      let estado = diasRestantes < 0 ? 'VENCIDO' : hoy >= fechaRetiro ? 'CRITICO' : 'NORMAL'
-      return {
-        lote: producto.customerData.LoteProducto,
-        nombre: producto.customerData.NombreProducto,
-        fechaVencimiento: formatDate(fechaVencimiento),
-        diasRestantes,
-        fechaRetiro: formatDate(fechaRetiro),
-        estado
+  
+      let estado
+      if (diasRestantes < 0) {
+        estado = 'VENCIDO'
+      } else if (hoy >= fechaRetiro) {
+        estado = 'CRITICO'
+      } else {
+        estado = 'NORMAL'
       }
+  
+      const productoCalculado = {
+        ...producto,
+        calculado: {
+          diasRestantes,
+          fechaRetiro: formatDate(fechaRetiro),
+          fechaVencimientoFormateada: formatDate(fechaVencimiento),
+          estado
+        }
+      }
+  
+      // Solo incluir los que YA entraron en ventana de retiro o ya vencieron
+      if (diasRestantes < 0) {
+        vencidos.push(productoCalculado)
+      } else if (hoy >= fechaRetiro) {
+        porVencer.push(productoCalculado)
+      }
+      // NORMAL no se incluye, aún no hay que avisarlo
+    })
+  
+    return { porVencer, vencidos }
+  }
+  
+  console.log('=== MOCK TEST - Productos a notificar ===')
+  console.log(`Hoy: ${hoyISO}\n`)
+  
+  const { porVencer, vencidos } = calcularProductos(productos, hoyISO)
+  
+  console.log(`--- EN VENTANA DE RETIRO (${porVencer.length}) ---`)
+  if (porVencer.length === 0) {
+    console.log('Ninguno\n')
+  } else {
+    porVencer.forEach(p => {
+      console.log(`[${p.calculado.estado}] ${p.customerData.LoteProducto} - ${p.customerData.NombreProducto}`)
+      console.log(`  Vence: ${p.calculado.fechaVencimientoFormateada} | Días restantes: ${p.calculado.diasRestantes} | Retiro desde: ${p.calculado.fechaRetiro}\n`)
     })
   }
   
-  console.log('=== MOCK TEST - Todos los productos ===')
-  console.log(`Hoy: ${hoyISO}\n`)
-  
-  calcularProductos(productos, hoyISO).forEach(p => {
-    console.log(`[${p.estado}] ${p.lote} - ${p.nombre}`)
-    console.log(`  Vence: ${p.fechaVencimiento} | Días restantes: ${p.diasRestantes} | Retiro: ${p.fechaRetiro}\n`)
-  })
+  console.log(`--- VENCIDOS (${vencidos.length}) ---`)
+  if (vencidos.length === 0) {
+    console.log('Ninguno\n')
+  } else {
+    vencidos.forEach(p => {
+      console.log(`[VENCIDO] ${p.customerData.LoteProducto} - ${p.customerData.NombreProducto}`)
+      console.log(`  Venció: ${p.calculado.fechaVencimientoFormateada} | Hace: ${Math.abs(p.calculado.diasRestantes)} días\n`)
+    })
+  }
