@@ -99,7 +99,7 @@ const serviceObject = {
 
           console.log(`[SOAP] porVencer: ${resultado.porVencer.length} | vencidos: ${resultado.vencidos.length}`)
 
-          return { return: JSON.stringify(resultado) }
+          return { return: resultado }
         } catch (err) {
           console.error('[SOAP] Error:', err.message)
           return { return: JSON.stringify({ error: err.message }) }
