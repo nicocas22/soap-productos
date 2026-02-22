@@ -86,11 +86,21 @@ app.get('/', (req, res) => {
 })
 
 app.listen(PORT, () => {
-  console.log(`Servidor corriendo en puerto ${PORT}`)
-
-  const wsdl = fs.readFileSync(path.join(__dirname, 'productos.wsdl'), 'utf8')
-
-  soap.listen(app, '/productos', serviceObject, wsdl, () => {
-    console.log(`WSDL disponible en: http://localhost:${PORT}/productos?wsdl`)
+    console.log(`Servidor corriendo en puerto ${PORT}`)
+  
+    try {
+      const wsdlPath = path.join(__dirname, 'productos.wsdl')
+      console.log(`[SOAP] Cargando WSDL desde: ${wsdlPath}`)
+      const wsdl = fs.readFileSync(wsdlPath, 'utf8')
+      console.log(`[SOAP] WSDL cargado OK`)
+  
+      soap.listen(app, '/productos', serviceObject, wsdl, () => {
+        console.log(`[SOAP] Servicio montado correctamente en /productos`)
+      })
+  
+      console.log(`[SOAP] soap.listen ejecutado`)
+    } catch (err) {
+      console.error(`[SOAP] Error:`, err.message)
+      console.error(err.stack)
+    }
   })
-})
