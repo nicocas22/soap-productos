@@ -1,139 +1,254 @@
 const productos = [
-    {
-      "_id": "6997735925890833cf5ad238",
-      "customerData": {
-        "LoteProducto": "TEST-P01",
-        "NombreProducto": "Yogurt Natural",
-        "MarcaProducto": "Colun",
-        "CategoriaProducto": "Productos Ultra Perecederos",
-        "Cantidad": 12,
-        "UnidadMedida": "Gr",
-        "PesoProducto": 150,
-        "FechaVencimiento": "2026-02-22T00:00:00Z",
-        "estado": "Activo",
-        "DiasRetiro": 5
-      }
+  {
+    "_id": "6997746669a908ef4233204e",
+    "mbData": {
+      "creationDate": "2026-02-26T04:34:31.542Z",
+      "createdBy": null,
+      "creationMethod": null,
+      "modDate": "2026-02-26T04:34:31.542Z",
+      "modBy": null,
+      "modMethod": null
     },
-    {
-      "_id": "6997742c25890833cf5ad23f",
-      "customerData": {
-        "LoteProducto": "TEST-P02",
-        "NombreProducto": "Queso Laminado",
-        "MarcaProducto": "Soprole",
-        "CategoriaProducto": "Productos Perecederos",
-        "Cantidad": 8,
-        "UnidadMedida": "Kg",
-        "PesoProducto": 500,
-        "FechaVencimiento": "2026-02-26T00:00:00Z",
-        "estado": "Activo",
-        "DiasRetiro": 10
-      }
-    },
-    {
-      "_id": "699774bf6856cbad7b2e081f",
-      "customerData": {
-        "LoteProducto": "TEST-P04",
-        "NombreProducto": "Arroz largo",
-        "MarcaProducto": "Carozzi",
-        "CategoriaProducto": "Productos de Larga Duración",
-        "Cantidad": 20,
-        "UnidadMedida": "Gr",
-        "PesoProducto": 250,
-        "FechaVencimiento": "2026-04-30T00:00:00Z",
-        "estado": "Activo",
-        "DiasRetiro": 30
-      }
-    },
-    {
-      "_id": "6997752325890833cf5ad24d",
-      "customerData": {
-        "LoteProducto": "TEST-P05",
-        "NombreProducto": "Leche entera",
-        "MarcaProducto": "Surlat",
-        "CategoriaProducto": "Productos Ultra Perecederos",
-        "Cantidad": 30,
-        "UnidadMedida": "L",
-        "PesoProducto": 1,
-        "FechaVencimiento": "2026-02-23T00:00:00Z",
-        "estado": "Activo",
-        "DiasRetiro": 5
-      }
-    },
-    {
-      "_id": "6998db506856cbad7b2e18de",
-      "customerData": {
-        "LoteProducto": "TEST-P06",
-        "NombreProducto": "Manjar",
-        "MarcaProducto": "Nestle",
-        "CategoriaProducto": "Productos Perecederos",
-        "Cantidad": 12,
-        "UnidadMedida": "Gr",
-        "PesoProducto": 500,
-        "FechaVencimiento": "2026-06-06T00:00:00Z",
-        "estado": "Activo",
-        "DiasRetiro": 10
-      }
-    },
-    {
-      "_id": "6998db806856cbad7b2e18e0",
-      "customerData": {
-        "LoteProducto": "TEST-P07",
-        "NombreProducto": "Cloro",
-        "MarcaProducto": "Clorox",
-        "CategoriaProducto": "Productos Especiales",
-        "Cantidad": 30,
-        "UnidadMedida": "L",
-        "PesoProducto": 1,
-        "FechaVencimiento": "2026-08-07T00:00:00Z",
-        "estado": "Activo",
-        "DiasRetiro": 60
-      }
-    },
-    {
-      "_id": "6998dbb969a908ef42333157",
-      "customerData": {
-        "LoteProducto": "TEST-P08",
-        "NombreProducto": "Bebida Coca Cola",
-        "MarcaProducto": "Coca-Cola",
-        "CategoriaProducto": "Productos de Larga Duración",
-        "Cantidad": 20,
-        "UnidadMedida": "L",
-        "PesoProducto": 3,
-        "FechaVencimiento": "2026-08-23T00:00:00Z",
-        "estado": "Activo",
-        "DiasRetiro": 30
-      }
-    },
-    {
-      "_id": "6998dc5325890833cf5ae34a",
-      "customerData": {
-        "LoteProducto": "TEST-P09",
-        "NombreProducto": "Pan",
-        "MarcaProducto": "Ianza",
-        "CategoriaProducto": "Productos Ultra Perecederos",
-        "Cantidad": 4,
-        "UnidadMedida": "Kg",
-        "PesoProducto": 3,
-        "FechaVencimiento": "2026-02-22T00:00:00Z",
-        "estado": "Activo",
-        "DiasRetiro": 5
-      }
-    },
-    {
-      "_id": "6997746669a908ef4233204e",
-      "customerData": {
-        "LoteProducto": "TEST-P03",
-        "NombreProducto": "Mantequilla",
-        "MarcaProducto": "Colun",
-        "CategoriaProducto": "Productos Perecederos",
-        "Cantidad": 20,
-        "UnidadMedida": "Gr",
-        "PesoProducto": 250,
-        "FechaVencimiento": "2026-02-15T00:00:00Z",
-        "estado": "Activo",
-        "DiasRetiro": 10
-      }
+    "customerData": {
+      "LoteProducto": "TEST-P03",
+      "NombreProducto": "mantequilla",
+      "MarcaProducto": "Colun",
+      "CategoriaProducto": "Productos Perecederos ",
+      "Cantidad": 20,
+      "UnidadMedida": "Gr",
+      "PesoProducto": 250,
+      "FechaVencimiento": "2026-02-15T00:00:00Z",
+      "estado": "Activo",
+      "FechaIngreso": "19-02-2026 20:31",
+      "DiasRetiro": 10,
+      "flag": false
     }
+  },
+  {
+    "_id": "699774bf6856cbad7b2e081f",
+    "mbData": {
+      "creationDate": "2026-02-26T04:34:31.542Z",
+      "createdBy": null,
+      "creationMethod": null,
+      "modDate": "2026-02-26T04:34:31.542Z",
+      "modBy": null,
+      "modMethod": null
+    },
+    "customerData": {
+      "LoteProducto": "TEST-P04",
+      "NombreProducto": "arroz largo",
+      "MarcaProducto": "Carozzi",
+      "CategoriaProducto": "Productos de Larga Duración",
+      "Cantidad": 20,
+      "UnidadMedida": "Gr",
+      "PesoProducto": 250,
+      "FechaVencimiento": "2026-04-30T00:00:00Z",
+      "estado": "Activo",
+      "FechaIngreso": "19-02-2026 20:32",
+      "DiasRetiro": 30,
+      "flag": false
+    }
+  },
+  {
+    "_id": "6997752325890833cf5ad24d",
+    "mbData": {
+      "creationDate": "2026-02-26T04:34:31.542Z",
+      "createdBy": null,
+      "creationMethod": null,
+      "modDate": "2026-02-26T04:34:31.542Z",
+      "modBy": null,
+      "modMethod": null
+    },
+    "customerData": {
+      "LoteProducto": "TEST-P05",
+      "NombreProducto": "leche entera",
+      "MarcaProducto": "Surlat",
+      "CategoriaProducto": "Productos Ultra Perecederos ",
+      "Cantidad": 30,
+      "UnidadMedida": "L",
+      "PesoProducto": 1,
+      "FechaVencimiento": "2026-02-23T00:00:00Z",
+      "estado": "Activo",
+      "FechaIngreso": "19-02-2026 20:34",
+      "DiasRetiro": 5,
+      "flag": false
+    }
+  },
+  {
+    "_id": "6998db506856cbad7b2e18de",
+    "mbData": {
+      "creationDate": "2026-02-26T04:34:31.542Z",
+      "createdBy": null,
+      "creationMethod": null,
+      "modDate": "2026-02-26T04:34:31.542Z",
+      "modBy": null,
+      "modMethod": null
+    },
+    "customerData": {
+      "LoteProducto": "TEST-P06",
+      "NombreProducto": "Manjar",
+      "MarcaProducto": "Nestle",
+      "CategoriaProducto": "Productos Perecederos ",
+      "Cantidad": 12,
+      "UnidadMedida": "Gr",
+      "PesoProducto": 500,
+      "FechaVencimiento": "2026-06-06T00:00:00Z",
+      "estado": "Activo",
+      "FechaIngreso": "20-02-2026 22:02",
+      "DiasRetiro": 10,
+      "flag": false
+    }
+  },
+  {
+    "_id": "6998db806856cbad7b2e18e0",
+    "mbData": {
+      "creationDate": "2026-02-26T04:34:31.542Z",
+      "createdBy": null,
+      "creationMethod": null,
+      "modDate": "2026-02-26T04:34:31.542Z",
+      "modBy": null,
+      "modMethod": null
+    },
+    "customerData": {
+      "LoteProducto": "\tTEST-P07",
+      "NombreProducto": "Cloro",
+      "MarcaProducto": "Clorox",
+      "CategoriaProducto": "Productos Especiales ",
+      "Cantidad": 30,
+      "UnidadMedida": "L",
+      "PesoProducto": 1,
+      "FechaVencimiento": "2026-08-07T00:00:00Z",
+      "estado": "Activo",
+      "FechaIngreso": "20-02-2026 22:03",
+      "DiasRetiro": 60,
+      "flag": false
+    }
+  },
+  {
+    "_id": "6998dbb969a908ef42333157",
+    "mbData": {
+      "creationDate": "2026-02-26T04:34:31.542Z",
+      "createdBy": null,
+      "creationMethod": null,
+      "modDate": "2026-02-26T04:34:31.542Z",
+      "modBy": null,
+      "modMethod": null
+    },
+    "customerData": {
+      "LoteProducto": "TEST-P08",
+      "NombreProducto": "Bebida coca cola",
+      "MarcaProducto": "Coca-Cola",
+      "CategoriaProducto": "Productos de Larga Duración",
+      "Cantidad": 20,
+      "UnidadMedida": "L",
+      "PesoProducto": 3,
+      "FechaVencimiento": "2026-08-23T00:00:00Z",
+      "estado": "Activo",
+      "FechaIngreso": "20-02-2026 22:04",
+      "DiasRetiro": 30,
+      "flag": false
+    }
+  },
+  {
+    "_id": "6998dc5325890833cf5ae34a",
+    "mbData": {
+      "creationDate": "2026-02-26T04:34:31.542Z",
+      "createdBy": null,
+      "creationMethod": null,
+      "modDate": "2026-02-26T04:34:31.542Z",
+      "modBy": null,
+      "modMethod": null
+    },
+    "customerData": {
+      "LoteProducto": "TEST-P09",
+      "NombreProducto": "Pan",
+      "MarcaProducto": "Ianza",
+      "CategoriaProducto": "Productos Ultra Perecederos ",
+      "Cantidad": 4,
+      "UnidadMedida": "Kg",
+      "PesoProducto": 3,
+      "FechaVencimiento": "2026-02-22T00:00:00Z",
+      "estado": "Activo",
+      "FechaIngreso": "20-02-2026 22:06",
+      "DiasRetiro": 5,
+      "flag": false
+    }
+  },
+  {
+    "_id": "699d2cfd6856cbad7b2e4ae9",
+    "mbData": {
+      "creationDate": "2026-02-26T04:34:31.542Z",
+      "createdBy": null,
+      "creationMethod": null,
+      "modDate": "2026-02-26T04:34:31.542Z",
+      "modBy": null,
+      "modMethod": null
+    },
+    "customerData": {
+      "LoteProducto": "TEST-P10",
+      "NombreProducto": "Chocolate trencito",
+      "MarcaProducto": "Nestle",
+      "CategoriaProducto": "Productos Ultra Perecederos ",
+      "Cantidad": 10,
+      "UnidadMedida": "Gr",
+      "PesoProducto": 250,
+      "FechaVencimiento": "2026-02-28T00:00:00Z",
+      "estado": "Activo",
+      "FechaIngreso": "24-02-2026 04:40",
+      "DiasRetiro": 5,
+      "flag": false
+    }
+  },
+  {
+    "_id": "699fcca46856cbad7b2e6c0b",
+    "customerData": {
+      "LoteProducto": "TEST-P12",
+      "NombreProducto": "margarina",
+      "MarcaProducto": "Calo",
+      "CategoriaProducto": "Productos Ultra Perecederos ",
+      "Cantidad": 13,
+      "UnidadMedida": "Gr",
+      "PesoProducto": 250,
+      "FechaVencimiento": "2026-03-03T00:00:00Z",
+      "estado": "Activo",
+      "FechaIngreso": "26-02-2026 04:25",
+      "DiasRetiro": 5,
+      "flag": false
+    },
+    "mbData": {
+      "creationDate": "2026-02-26T04:34:31.542Z",
+      "createdBy": null,
+      "creationMethod": null,
+      "modDate": "2026-02-26T06:00:35.000Z",
+      "modBy": "bar.riffo@duocuc.cl",
+      "modMethod": "A10_tll_00189"
+    }
+  },
+  {
+    "_id": "699fcce025890833cf5b34a4",
+    "customerData": {
+      "LoteProducto": "TEST-P13",
+      "NombreProducto": "agua",
+      "MarcaProducto": "Bresler",
+      "CategoriaProducto": "Productos Perecederos ",
+      "Cantidad": 23,
+      "UnidadMedida": "L",
+      "PesoProducto": 3,
+      "FechaVencimiento": "2026-03-08T00:00:00Z",
+      "estado": "Activo",
+      "FechaIngreso": "26-02-2026 04:26",
+      "DiasRetiro": 10,
+      "flag": false
+    },
+    "mbData": {
+      "creationDate": "2026-02-26T04:34:31.542Z",
+      "createdBy": null,
+      "creationMethod": null,
+      "modDate": "2026-02-26T06:02:37.000Z",
+      "modBy": "bar.riffo@duocuc.cl",
+      "modMethod": "A10_tll_00189"
+    }
+  }
   ]
   
   const hoyISO = new Date().toISOString()
@@ -212,3 +327,34 @@ const productos = [
       console.log(`  Venció: ${p.calculado.fechaVencimientoFormateada} | Hace: ${Math.abs(p.calculado.diasRestantes)} días\n`)
     })
   }
+
+  const lotesVencidos = vencidos.map(p => p.customerData.LoteProducto)
+const lotesCriticos = porVencer.map(p => p.customerData.LoteProducto)
+
+// Generar operations para bulkwrite2
+const operationsVencidos = lotesVencidos.map(lote => ({
+  updateOne: {
+    filter: `{ "customerData.LoteProducto": "${lote}" }`,
+    update: `{"$set": {"customerData.estado": "Vencido"}}`,
+    upsert: false
+  }
+}))
+
+const operationsCriticos = lotesCriticos.map(lote => ({
+  updateOne: {
+    filter: `{ "customerData.LoteProducto": "${lote}" }`,
+    update: `{"$set": {"customerData.estado": "Critico"}}`,
+    upsert: false
+  }
+}))
+
+const operationsTotal = [...operationsVencidos, ...operationsCriticos]
+
+console.log('--- LOTES VENCIDOS ---')
+console.log(lotesVencidos)
+
+console.log('--- LOTES CRITICOS ---')
+console.log(lotesCriticos)
+
+console.log('\n--- OPERATIONS BULKWRITE (JSON listo para inyectar) ---')
+console.log(JSON.stringify(operationsTotal, null, 2))
