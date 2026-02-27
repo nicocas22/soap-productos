@@ -328,33 +328,4 @@ const productos = [
     })
   }
 
-  const lotesVencidos = vencidos.map(p => p.customerData.LoteProducto)
-const lotesCriticos = porVencer.map(p => p.customerData.LoteProducto)
-
-// Generar operations para bulkwrite2
-const operationsVencidos = lotesVencidos.map(lote => ({
-  updateOne: {
-    filter: `{ "customerData.LoteProducto": "${lote}" }`,
-    update: `{"$set": {"customerData.estado": "Vencido"}}`,
-    upsert: false
-  }
-}))
-
-const operationsCriticos = lotesCriticos.map(lote => ({
-  updateOne: {
-    filter: `{ "customerData.LoteProducto": "${lote}" }`,
-    update: `{"$set": {"customerData.estado": "Critico"}}`,
-    upsert: false
-  }
-}))
-
-const operationsTotal = [...operationsVencidos, ...operationsCriticos]
-
-console.log('--- LOTES VENCIDOS ---')
-console.log(lotesVencidos)
-
-console.log('--- LOTES CRITICOS ---')
-console.log(lotesCriticos)
-
-console.log('\n--- OPERATIONS BULKWRITE (JSON listo para inyectar) ---')
-console.log(JSON.stringify(operationsTotal, null, 2))
+  

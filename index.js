@@ -51,55 +51,36 @@ function calcularProductos(productos, hoyISO) {
     }
   })
 
-  // Generar operations para bulkwrite2
-  const operationsVencidos = vencidos.map(p => ({
-    updateOne: {
-      filter: `{ "customerData.LoteProducto": "${p.customerData.LoteProducto}" }`,
-      update: `{"$set": {"customerData.estado": "Vencido"}}`,
-      upsert: false
-    }
-  }))
-
-  const operationsCriticos = porVencer.map(p => ({
-    updateOne: {
-      filter: `{ "customerData.LoteProducto": "${p.customerData.LoteProducto}" }`,
-      update: `{"$set": {"customerData.estado": "Critico"}}`,
-      upsert: false
-    }
-  }))
-
-  const bulkwriteOperations = [...operationsVencidos, ...operationsCriticos]
-
-  console.log(`[SOAP] bulkwriteOperations generadas: ${bulkwriteOperations.length}`)
-
-  return { porVencer, vencidos, bulkwriteOperations }
+  return { porVencer, vencidos }
 }
 
 function normalizarProductos(raw) {
-  if (Array.isArray(raw)) return raw
-
-  if (typeof raw === 'string') {
-    try {
-      const parsed = JSON.parse(raw)
-      return Array.isArray(parsed) ? parsed : Object.values(parsed)
-    } catch (e) {
-      const rows = parse(raw, {
-        delimiter: ';',
-        columns: true,
-        skip_empty_lines: true
-      })
-      return rows.map(row => ({
-        _id: row._id,
-        customerData: JSON.parse(row.customerData.replace(/""/g, '"')),
-        mbData: JSON.parse(row.mbData.replace(/""/g, '"'))
-      }))
+    if (Array.isArray(raw)) return raw
+  
+    if (typeof raw === 'string') {
+      // Intentar como JSON primero
+      try {
+        const parsed = JSON.parse(raw)
+        return Array.isArray(parsed) ? parsed : Object.values(parsed)
+      } catch (e) {
+        // Es CSV, parsearlo
+        const rows = parse(raw, {
+          delimiter: ';',
+          columns: true,
+          skip_empty_lines: true
+        })
+        return rows.map(row => ({
+          _id: row._id,
+          customerData: JSON.parse(row.customerData.replace(/""/g, '"')),
+          mbData: JSON.parse(row.mbData.replace(/""/g, '"'))
+        }))
+      }
     }
+  
+    if (typeof raw === 'object' && raw !== null) return Object.values(raw)
+  
+    throw new Error('Formato no reconocido')
   }
-
-  if (typeof raw === 'object' && raw !== null) return Object.values(raw)
-
-  throw new Error('Formato no reconocido')
-}
 
 const serviceObject = {
   ProductosService: {
@@ -118,13 +99,7 @@ const serviceObject = {
 
           console.log(`[SOAP] porVencer: ${resultado.porVencer.length} | vencidos: ${resultado.vencidos.length}`)
 
-          return {
-            return: JSON.stringify({
-              porVencer: resultado.porVencer,
-              vencidos: resultado.vencidos,
-              bulkwriteOperations: resultado.bulkwriteOperations
-            })
-          }
+          return { return: resultado }
         } catch (err) {
           console.error('[SOAP] Error:', err.message)
           return { return: JSON.stringify({ error: err.message }) }
